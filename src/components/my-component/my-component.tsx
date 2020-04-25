@@ -1,4 +1,4 @@
-import { Component, Prop, h, State } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 
 interface Post {
   id: number
@@ -16,28 +16,25 @@ interface Post {
 export class MyComponent {
 
   // @State() posts: Post[];
-  posts: Post[];
+  posts: Post[] = [];
 
+  /**
+   * Base URL e.g. 'http://localhost:8000/'
+   */
+  @Prop() baseurl: string;
+
+  /**
+   * URI (path to resource)
+   */
   @Prop() src: string;
-
-  /**
-   * The first name
-   */
-  @Prop() first: string;
-
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
 
   async componentWillLoad() {
 
-    let url = 'http://localhost:8000/' + this.src
+    if (this.baseurl == null) return
+
+    let url = this.baseurl + this.src
+    console.log(url);
+
     return fetch(url)
       .then(r => {
         if (r.ok)
@@ -58,7 +55,7 @@ export class MyComponent {
   render() {
     return (
       <div>
-        {this.posts.map(post => (<div>{post.title}</div>))}
+        {this.posts.length > 0 ? this.posts.map(post => (<div>{post.title}</div>)) : "NO DATA" }
       </div>
     );
   }

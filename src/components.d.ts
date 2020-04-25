@@ -8,17 +8,12 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyComponent {
         /**
-          * The first name
+          * Base URL e.g. 'http://localhost:8000/'
          */
-        "first": string;
+        "baseurl": string;
         /**
-          * The last name
+          * URI (path to resource)
          */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
         "src": string;
     }
 }
@@ -36,17 +31,12 @@ declare global {
 declare namespace LocalJSX {
     interface MyComponent {
         /**
-          * The first name
+          * Base URL e.g. 'http://localhost:8000/'
          */
-        "first"?: string;
+        "baseurl"?: string;
         /**
-          * The last name
+          * URI (path to resource)
          */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
         "src"?: string;
     }
     interface IntrinsicElements {
